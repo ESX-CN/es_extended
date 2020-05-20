@@ -297,14 +297,18 @@ function CreateExtendedPlayer(playerId, identifier, group, accounts, inventory, 
 		if ESX.DoesJobExist(job, grade) then
 			local jobObject, gradeObject = ESX.Jobs[job], ESX.Jobs[job].grades[grade]
 
-			self.job.id    = jobObject.id
-			self.job.name  = jobObject.name
-			self.job.label = jobObject.label
+			self.job.id    	  = jobObject.id
+			self.job.name  	  = jobObject.name
+			self.job.label	  = jobObject.label
+			self.job.label_sc = jobObject.label_sc
+			self.job.label_tc = jobObject.label_tc
 
-			self.job.grade        = tonumber(grade)
-			self.job.grade_name   = gradeObject.name
-			self.job.grade_label  = gradeObject.label
-			self.job.grade_salary = gradeObject.salary
+			self.job.grade        	= tonumber(grade)
+			self.job.grade_name   	= gradeObject.name
+			self.job.grade_label  	= gradeObject.label
+			self.job.grade_label_sc = gradeObject.label_sc
+			self.job.grade_label_tc = gradeObject.label_tc
+			self.job.grade_salary 	= gradeObject.salary
 
 			if gradeObject.skin_male then
 				self.job.skin_male = json.decode(gradeObject.skin_male)
@@ -494,8 +498,16 @@ function CreateExtendedPlayer(playerId, identifier, group, accounts, inventory, 
 		self.triggerEvent('esx:showNotification', msg)
 	end
 
+	self.showNotificationAndTranslate = function(msg, flash, saveToBrief, hudColorIndex)
+		self.triggerEvent('esx:showNotificationAndTranslate', msg, flash, saveToBrief, hudColorIndex)
+	end
+
 	self.showHelpNotification = function(msg, thisFrame, beep, duration)
 		self.triggerEvent('esx:showHelpNotification', msg, thisFrame, beep, duration)
+	end
+
+	self.showHelpNotificationAndTranslate = function(msg, thisFrame, beep, duration)
+		self.triggerEvent('esx:showHelpNotificationAndTranslate', msg, thisFrame, beep, duration)
 	end
 
 	return self

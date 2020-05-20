@@ -15,7 +15,7 @@ html {
 #hud {
 	opacity: 0.0;
 	position: absolute;
-	font-family: 'Pricedown';
+	font-family: 'Pricedown','黑体';
 	font-size: 35px;
 	color: white;
 	padding: 4px;

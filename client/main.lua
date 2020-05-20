@@ -48,6 +48,14 @@ AddEventHandler('esx:playerLoaded', function(playerData)
 			ESX.UI.HUD.RegisterElement('account_' .. v.name, k, 0, accountTpl, {money = ESX.Math.GroupDigits(v.money)})
 		end
 
+		if Config.Locale == 'tc' then
+			playerData.job.label = playerData.job.label_tc
+			playerData.job.grade_label = playerData.job.grade_label_tc
+		elseif Config.Locale == 'sc' then
+			playerData.job.label = playerData.job.label_sc
+			playerData.job.grade_label = playerData.job.grade_label_sc
+		end
+
 		local jobTpl = '<div>{{job_label}} - {{grade_label}}</div>'
 
 		if playerData.job.grade_label == '' or playerData.job.grade_label == playerData.job.label then
@@ -247,6 +255,15 @@ end)
 RegisterNetEvent('esx:setJob')
 AddEventHandler('esx:setJob', function(job)
 	if Config.EnableHud then
+		
+		if Config.Locale == 'tc' then
+			job.label = job.label_tc
+			job.grade_label = job.grade_label_tc
+		elseif Config.Locale == 'sc' then
+			job.label = job.label_sc
+			job.grade_label = job.grade_label_sc
+		end
+
 		ESX.UI.HUD.UpdateElement('job', {
 			job_label = job.label,
 			grade_label = job.grade_label

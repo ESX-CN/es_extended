@@ -766,6 +766,14 @@ ESX.ShowInventory = function()
 			local formattedMoney = _U('locale_currency', ESX.Math.GroupDigits(v.money))
 			local canDrop = v.name ~= 'bank'
 
+			if v.name == 'bank' then
+				v.label = _U('account_bank')
+			elseif v.name == 'black_money' then
+				v.label = _U('account_black_money')
+			elseif v.name == 'money' then
+				v.label = _U('account_money')
+			end
+			
 			table.insert(elements, {
 				label = ('%s: <span style="color:green;">%s</span>'):format(v.label, formattedMoney),
 				count = v.money,
@@ -780,6 +788,13 @@ ESX.ShowInventory = function()
 
 	for k,v in ipairs(ESX.PlayerData.inventory) do
 		if v.count > 0 then
+
+			if Config.Locale == 'tc' then
+				v.label = v.label_tc
+			elseif Config.Locale == 'sc' then
+				v.label = v.label_sc
+			end
+
 			currentWeight = currentWeight + (v.weight * v.count)
 
 			table.insert(elements, {
@@ -1015,14 +1030,29 @@ AddEventHandler('esx:showNotification', function(msg)
 	ESX.ShowNotification(msg)
 end)
 
+RegisterNetEvent('esx:showNotificationAndTranslate')
+AddEventHandler('esx:showNotificationAndTranslate', function(msg)
+	ESX.ShowNotification(_U(msg))
+end)
+
 RegisterNetEvent('esx:showAdvancedNotification')
 AddEventHandler('esx:showAdvancedNotification', function(sender, subject, msg, textureDict, iconType, flash, saveToBrief, hudColorIndex)
 	ESX.ShowAdvancedNotification(sender, subject, msg, textureDict, iconType, flash, saveToBrief, hudColorIndex)
 end)
 
+RegisterNetEvent('esx:showPayCheckNotification')
+AddEventHandler('esx:showPayCheckNotification', function(title, subject, msg, price, icon, iconType)
+	ESX.ShowAdvancedNotification(_U(title), _U(subject), _U(msg,price), icon, iconType)
+end)
+
 RegisterNetEvent('esx:showHelpNotification')
 AddEventHandler('esx:showHelpNotification', function(msg, thisFrame, beep, duration)
 	ESX.ShowHelpNotification(msg, thisFrame, beep, duration)
+end)
+
+RegisterNetEvent('esx:showHelpNotificationAndTranslate')
+AddEventHandler('esx:showHelpNotificationAndTranslate', function(msg, thisFrame, beep, duration, ...)
+	ESX.ShowHelpNotification(_U(msg), thisFrame, beep, duration)
 end)
 
 -- SetTimeout

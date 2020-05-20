@@ -23,6 +23,8 @@ MySQL.ready(function()
 		for k,v in ipairs(result) do
 			ESX.Items[v.name] = {
 				label = v.label,
+				label_sc = v.label_sc,
+				label_tc = v.label_tc,
 				weight = v.weight,
 				rare = v.rare,
 				canRemove = v.can_remove

@@ -17,6 +17,8 @@ CREATE TABLE `users` (
 CREATE TABLE `items` (
 	`name` VARCHAR(50) NOT NULL,
 	`label` VARCHAR(50) NOT NULL,
+	`label_sc` VARCHAR(50) NOT NULL,
+	`label_tc` VARCHAR(50) NOT NULL,
 	`weight` INT NOT NULL DEFAULT 1,
 	`rare` TINYINT NOT NULL DEFAULT 0,
 	`can_remove` TINYINT NOT NULL DEFAULT 1,
@@ -30,6 +32,8 @@ CREATE TABLE `job_grades` (
 	`grade` INT NOT NULL,
 	`name` VARCHAR(50) NOT NULL,
 	`label` VARCHAR(50) NOT NULL,
+	`label_sc` VARCHAR(50) NOT NULL,
+	`label_tc` VARCHAR(50) NOT NULL,
 	`salary` INT NOT NULL,
 	`skin_male` LONGTEXT NOT NULL,
 	`skin_female` LONGTEXT NOT NULL,
@@ -37,13 +41,15 @@ CREATE TABLE `job_grades` (
 	PRIMARY KEY (`id`)
 );
 
-INSERT INTO `job_grades` VALUES (1,'unemployed',0,'unemployed','Unemployed',200,'{}','{}');
+INSERT INTO `job_grades` VALUES (1,'unemployed',0,'unemployed','Unemployed','无业游民','失業者',200,'{}','{}');
 
 CREATE TABLE `jobs` (
 	`name` VARCHAR(50) NOT NULL,
 	`label` VARCHAR(50) DEFAULT NULL,
+	`label_sc` VARCHAR(50) DEFAULT NULL,
+	`label_tc` VARCHAR(50) DEFAULT NULL,
 
 	PRIMARY KEY (`name`)
 );
 
-INSERT INTO `jobs` VALUES ('unemployed','Unemployed');
+INSERT INTO `jobs` VALUES ('unemployed','Unemployed','无业游民','失業者');
